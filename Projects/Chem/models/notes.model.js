@@ -1,12 +1,11 @@
 'use strict';
 const mongoose = require('mongoose'),
         Schema = mongoose.Schema;
-        const userSchema = require('./user.model'),
-        usersModel = mongoose.model('Users');
+        const userSchema = require('./user.model');
 
         var commentsSchema = new Schema(
             {
-                user:{ type: Schema.Types.ObjectId, ref: 'usersModel' },
+                user:{ type: Schema.Types.ObjectId, ref: 'Users' },
                 comment:{type:String},
                 commentDate:{type:Date,default:new Date()},
             }
@@ -31,7 +30,7 @@ const mongoose = require('mongoose'),
                 comments:[commentsSchema],
                 createddate:{type:Date,default:new Date()},
                 cardstatus:{type:String},
-                createdby:{ type: Schema.Types.ObjectId, ref: 'usersModel' },
+                createdby:{ type: Schema.Types.ObjectId, ref: 'Users' },
             }
         )
 
