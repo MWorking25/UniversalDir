@@ -2,8 +2,12 @@ const express = require('express');
 const ChemRouter = express.Router();
 const authUser = require('./security/UserAuth');
 const userCtrl = require('./controllers/users.controller'),
-      patientCtrl = require('./controllers/patients.controller');
+      patientCtrl = require('./controllers/patients.controller'),
+      noteCtrl = require('./controllers/notes.controller');
 
+        noteCtrl.get('/SaveNote',function(req,res){
+            authUser(req, res);noteCtrl.SaveNote(req,res);
+        })
         ChemRouter.get('/list',function(req,res){
             userCtrl.ListUsers(req,res);
         })
