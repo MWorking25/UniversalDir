@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        userSchema = require('./user.model');
+        adminUserSchema = require('./adminUsers.model');
 
         var fieldLocations = new Schema({
             timing:{type:Date},
@@ -20,10 +20,14 @@ const mongoose = require('mongoose'),
                 website:{type:String},
                 activestatus:{type:String},
                 createddate:{type:Date,default:new Date()},
-                createdby:{ type: Schema.Types.ObjectId, ref: 'Users' },
+                createdby:{ type: Schema.Types.ObjectId, ref: 'AdminUsers' },
             }
         )
 
-
-        mongoose.model('fieldModel', fieldSchema);
+        fieldLocations.set('toJSON', { getters: true, setters: true ,virtuals: true});
+        fieldLocations.set('toObject', { getters: true, setters: true,virtuals: true });
+        fieldSchema.set('toJSON', { getters: true, setters: true ,virtuals: true});
+        fieldSchema.set('toObject', { getters: true, setters: true,virtuals: true });
         mongoose.model('fieldlocationModel', fieldLocations);
+        mongoose.model('fieldModel', fieldSchema);
+      

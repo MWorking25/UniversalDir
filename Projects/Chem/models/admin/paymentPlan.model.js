@@ -2,7 +2,7 @@
 const mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         fieldSchema = require('./fields.model'),
-        userSchema = require('./user.model');
+        adminUserSchema = require('./adminUsers.model');
 
         var paymentPlanSchema = new Schema(
             {
@@ -12,9 +12,10 @@ const mongoose = require('mongoose'),
                 amount:{ type: Number },
                 description:{type:String},
                 createddate:{type:Date,default:new Date()},
-                createdby:{ type: Schema.Types.ObjectId, ref: 'Users' },
+                createdby:{ type: Schema.Types.ObjectId, ref: 'AdminUsers' },
             }
         )
 
-
+        paymentPlanSchema.set('toJSON', { getters: true, setters: true ,virtuals: true});
+        paymentPlanSchema.set('toObject', { getters: true, setters: true,virtuals: true });
         mongoose.model('paymentPlanModel', paymentPlanSchema);

@@ -1,7 +1,9 @@
 'use strict';
 const mongoose = require('mongoose'),
         Schema = mongoose.Schema;
-        const userSchema = require('./user.model');
+        
+        const userSchema = require('./patients/user.model'),
+                adminUserSchema = require('./admin/adminUsers.model');
 
         var commentsSchema = new Schema(
             {
@@ -11,6 +13,9 @@ const mongoose = require('mongoose'),
             }
         );
 
+        commentsSchema.set('toJSON', { getters: true, setters: true ,virtuals: true});
+        commentsSchema.set('toObject', { getters: true, setters: true,virtuals: true });
+
         var checklistSchema = new Schema(
             {
                item:{type:String},
@@ -18,6 +23,10 @@ const mongoose = require('mongoose'),
                createddate:{type:Date,default:new Date()},
             }
         );
+
+
+        checklistSchema.set('toJSON', { getters: true, setters: true ,virtuals: true});
+        checklistSchema.set('toObject', { getters: true, setters: true,virtuals: true });
 
         var notesSchema = new Schema(
             {
@@ -31,8 +40,11 @@ const mongoose = require('mongoose'),
                 createddate:{type:Date,default:new Date()},
                 cardstatus:{type:String},
                 createdby:{ type: Schema.Types.ObjectId, ref: 'Users' },
+                createdbyadmin:{ type: Schema.Types.ObjectId, ref: 'AdminUsers' },
             }
-        )
+        );
 
+        notesSchema.set('toJSON', { getters: true, setters: true ,virtuals: true});
+        notesSchema.set('toObject', { getters: true, setters: true,virtuals: true });
 
         mongoose.model('Notes', notesSchema);
