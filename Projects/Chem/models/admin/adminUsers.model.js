@@ -34,6 +34,7 @@ const mongoose = require('mongoose'),
                                       ],
                     }
                 ],
+                rating:{type:Number},
                 activestatus:{type:String},
                 createddate:{type:Date,default:new Date()},
                 createdby:{ type: Schema.Types.ObjectId, ref: 'AdminUsers' },
